@@ -9,7 +9,7 @@ First we need to find the device on the network.
 nmap 192.168.56.*
 ```
 
-![Basic nmap](./screenshots/2_nmap.png)
+![Basic nmap](./screenshots/1_finding_device.png)
 
 From the result we can see that our vulnhub box has ip 192.168.56.120. Lets scan the device using nmap again
 
