@@ -41,7 +41,7 @@ Well, there is nothing much here.
 
 <br>I'm using a tool called **gobuster** with a wordlist that comes preinstalled with kali.<br>
 
-> Gobuster us a tool used to enumerate all routes of a webpage. You need to specify the url and a url. There are other tools, i'll leave that upto you to explore.
+> Gobuster us a tool used to enumerate all routes of a webpage. You need to specify the url and a wordlist. There are other tools, i'll leave that upto you to explore.
 
 ```bash
 gobuster dir -u http://192.168.56.127 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
